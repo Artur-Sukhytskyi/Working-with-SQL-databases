@@ -8,6 +8,7 @@ from sqlalchemy.ext.declarative import declarative_base
 DB_PATH = "sqlite:///sochi_athletes.sqlite3"
 Base = declarative_base()
 
+#Описываем структуру таблицы Athelete, содержащую данные об отлетах
 
 class Athelete(Base):
 
@@ -27,6 +28,7 @@ class Athelete(Base):
     sport = sa.Column(sa.Text)
     country = sa.Column(sa.Text)
 
+# Описываем структуру таблицы user, содержащую данные о пользователях
 
 class User(Base):
 
@@ -40,6 +42,7 @@ class User(Base):
     birthdate = sa.Column(sa.Text)
     height = sa.Column(sa.Float)
 
+#Создаём соединение с базой данных, создаём таблицы, если их нет
 
 def connect_db():
 
@@ -48,6 +51,7 @@ def connect_db():
     session = sessionmaker(engine)
     return session()
 
+#Запрашиваем идентификатор пользователя для поиска ближайших атлетов
 
 def request_data():
 
@@ -55,6 +59,7 @@ def request_data():
     user_id = input("Ввети идентификатор пользователя: ")
     return user_id
 
+#Конвертация даты
 
 def convert_str_to_date(date_str):
 
@@ -63,6 +68,7 @@ def convert_str_to_date(date_str):
     date = datetime.date(*date_parts)
     return date
 
+#Поиск ближайшего атлета по дате рождения
 
 def nearest_by_bd(user, session):
 
@@ -86,6 +92,7 @@ def nearest_by_bd(user, session):
     
     return athlete_id, athlete_bd
 
+#Поиск ближайшего атлета по росту
 
 def nearest_by_height(user, session):
 
