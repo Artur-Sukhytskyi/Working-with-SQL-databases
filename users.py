@@ -5,6 +5,8 @@ from sqlalchemy.ext.declarative import declarative_base
 DB_PATH = "sqlite:///sochi_athletes.sqlite3"
 Base = declarative_base()
 
+# Описываем структуру таблицы user, содержащую данные о пользователях
+
 class User(Base):
 
 	__tablename__ = 'user'
@@ -23,6 +25,8 @@ class User(Base):
 
 	height = sa.Column(sa.Float)
 
+#Создаём соединение с базой данных, создаём таблицы, если их нет
+
 def connect_db():
 	
 	engine = sa.create_engine(DB_PATH)
@@ -32,6 +36,8 @@ def connect_db():
 	session = sessionmaker(engine)
 
 	return session()
+
+#Запрос у пользователя данных
 
 def request_data():
 	
